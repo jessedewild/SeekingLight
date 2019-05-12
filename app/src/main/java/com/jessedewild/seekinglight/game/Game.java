@@ -1,5 +1,7 @@
 package com.jessedewild.seekinglight.game;
 
+import android.content.res.AssetManager;
+
 import com.jessedewild.seekinglight.entities.Background;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.entities.Map;
@@ -8,9 +10,11 @@ import com.jessedewild.seekinglight.entities.Scroller;
 import java.util.ArrayList;
 
 public class Game extends GameModel {
+
     // GameModel state
     private Map map;
     public Scroller scroller;
+    private AssetManager assetManager;
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -51,5 +55,9 @@ public class Game extends GameModel {
         for (Game.Listener listener : listeners) {
             listener.scrollChanged();
         }
+    }
+
+    public void setAssetManager(AssetManager assetManager) {
+        this.assetManager = assetManager;
     }
 }

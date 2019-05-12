@@ -12,9 +12,9 @@ public class Map extends Entity {
     static final int width = 30;
 
     // For each tile, a boolean is saved if it is a floor or a wall
-    // true  == floor
-    // false == wall
-    private boolean[][] tiles = new boolean[height][width];
+    // 1 == floor
+    // 2 == wall
+    private int[][] tiles = new int[height][width];
 
     // When resources are first used, the decoded Bitmap is written to this array, as a cache.
     static private Bitmap[] spriteBitmaps;
@@ -23,6 +23,7 @@ public class Map extends Entity {
 
     public Map(Game game) {
         this.game = game;
+
     }
 
     private void generateMapTiles() {

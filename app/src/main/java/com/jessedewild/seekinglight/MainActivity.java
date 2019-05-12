@@ -12,8 +12,8 @@ import com.jessedewild.seekinglight.game.Activity;
 
 public class MainActivity extends AppCompatActivity {
 
-    GameView gameCanvas;
-    GameModel game;
+    private GameView gameCanvas;
+    private GameModel game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
