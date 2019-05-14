@@ -29,7 +29,6 @@ public class Map extends Entity {
         this.game = game;
         this.json = json;
         this.level = new Gson().fromJson(json, Level.class);
-        System.out.println(level.toString());
 
         generateMapTiles();
 
@@ -66,7 +65,7 @@ public class Map extends Entity {
                     // Load/decode bitmaps before we first draw them.
                     spriteBitmaps[tile] = gv.getBitmapFromResource(spriteResourceIds[tile]);
                 }
-                gv.drawBitmap(spriteBitmaps[tile], (float) row - scrollX, column - scrollY, 1, 1);
+                gv.drawBitmap(spriteBitmaps[tile], (float) column - scrollX, (float) row - scrollY, 1, 1);
             }
         }
     }

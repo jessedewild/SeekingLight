@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         gameCanvas = findViewById(R.id.spaceShooter);
         game = new Game();
         ((Game) game).setJson(readJSONFile());
+        ((Game) game).setAutoScroll(true);
 
         findViewById(R.id.spaceShooterText).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
-        System.out.println(json);
         return json;
     }
 }

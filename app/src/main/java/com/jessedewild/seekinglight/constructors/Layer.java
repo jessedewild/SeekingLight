@@ -10,10 +10,10 @@ public class Layer {
     private String type;
     private boolean visible;
     private int width;
-    private int x;
-    private int y;
+    private float x;
+    private float y;
 
-    public Layer(int[] data, int height, int id, String name, int opacity, String type, boolean visible, int width, int x, int y) {
+    public Layer(int[] data, int height, int id, String name, int opacity, String type, boolean visible, int width, float x, float y) {
         this.data = data;
         this.height = height;
         this.id = id;
@@ -58,11 +58,11 @@ public class Layer {
         return width;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.jessedewild.seekinglight.entities.Scroller;
+
 public class GameView extends View implements View.OnTouchListener {
 
     // While in an `onDraw` method, this references the `Canvas` to be painted to.
@@ -283,5 +285,7 @@ public class GameView extends View implements View.OnTouchListener {
             frameCount = 0;
             lastFpsLogTime = now;
         }
+
+        Log.i("XandY", "X: " + gameModel.getEntities(Scroller.class).get(0).x + "  - Y: " + gameModel.getEntities(Scroller.class).get(0).y);
     }
 }

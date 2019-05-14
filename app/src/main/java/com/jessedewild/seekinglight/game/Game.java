@@ -1,7 +1,7 @@
 package com.jessedewild.seekinglight.game;
 
-import android.content.res.AssetManager;
-
+import com.google.gson.Gson;
+import com.jessedewild.seekinglight.constructors.Level;
 import com.jessedewild.seekinglight.entities.Background;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.entities.Scroller;
@@ -14,6 +14,7 @@ public class Game extends GameModel {
     public Map map;
     public Scroller scroller;
     private String json;
+    private boolean autoScroll;
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -48,6 +49,9 @@ public class Game extends GameModel {
         addEntity(map);
 
         scroller = new Scroller(this);
+        scroller.setAutoScroll(autoScroll);
+        scroller.setX(new Gson().fromJson(json, Level.class).getLayers()[0].getX());
+        scroller.setY(new Gson().fromJson(json, Level.class).getLayers()[0].getY());
         addEntity(scroller);
 
         // Fire event to set initial value in scroll view
@@ -58,5 +62,9 @@ public class Game extends GameModel {
 
     public void setJson(String json) {
         this.json = json;
+    }
+
+    public void setAutoScroll(boolean autoScroll) {
+        this.autoScroll = autoScroll;
     }
 }

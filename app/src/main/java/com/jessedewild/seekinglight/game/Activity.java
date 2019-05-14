@@ -3,6 +3,7 @@ package com.jessedewild.seekinglight.game;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.jessedewild.seekinglight.R;
 import com.jessedewild.seekinglight.lib.GameView;
 
 import java.io.IOException;
@@ -16,11 +17,9 @@ public class Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
 
-        // In this example, we don't require a Layout or any other Android Views than
-        // are custom GameCanvas.
-        gameView = new GameView(this);
-        setContentView(gameView);
+        gameView = findViewById(R.id.gameView);
 
         // If a running game has been serialized (because it has been paused for
         // a long time, or because of an orientation change), recreate the Game
@@ -30,6 +29,7 @@ public class Activity extends AppCompatActivity {
         } else {
             game = new Game();
             game.setJson(readJSONFile(1));
+            game.setAutoScroll(false);
         }
     }
 
@@ -64,7 +64,6 @@ public class Activity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
-        System.out.println(json);
         return json;
     }
 }
