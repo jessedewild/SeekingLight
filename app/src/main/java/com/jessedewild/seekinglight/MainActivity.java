@@ -10,6 +10,9 @@ import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.game.Game;
 import com.jessedewild.seekinglight.game.Activity;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private GameView gameCanvas;
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         gameCanvas = findViewById(R.id.spaceShooter);
         game = new Game();
+        ((Game) game).setJson(readJSONFile());
 
         findViewById(R.id.spaceShooterText).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +45,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         gameCanvas.setGame(null);
+    }
+
+    private String readJSONFile() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("maps/level1/level1.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println(json);
+        return json;
     }
 }

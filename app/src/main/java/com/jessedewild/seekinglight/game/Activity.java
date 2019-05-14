@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.jessedewild.seekinglight.lib.GameView;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Activity extends AppCompatActivity {
 
     private Game game;
@@ -26,9 +29,8 @@ public class Activity extends AppCompatActivity {
             game = (Game) savedInstanceState.getSerializable("game");
         } else {
             game = new Game();
+            game.setJson(readJSONFile(1));
         }
-
-        game.setAssetManager(getAssets());
     }
 
     @Override
@@ -47,5 +49,22 @@ public class Activity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         gameView.setGame(null);
+    }
+
+    private String readJSONFile(int levelNum) {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("maps/level1/level1.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println(json);
+        return json;
     }
 }
