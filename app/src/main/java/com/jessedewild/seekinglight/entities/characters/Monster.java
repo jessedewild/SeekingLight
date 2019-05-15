@@ -1,6 +1,10 @@
 package com.jessedewild.seekinglight.entities.characters;
 
-import com.jessedewild.seekinglight.entities.Character;
+import android.graphics.drawable.Drawable;
 
-public class Monster extends Character {
+import com.jessedewild.seekinglight.lib.Entity;
+
+public class Monster extends Entity {
+
+    private Drawable drawable;
 }

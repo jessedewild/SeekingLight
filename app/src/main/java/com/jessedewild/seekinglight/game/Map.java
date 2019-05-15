@@ -15,6 +15,9 @@ public class Map extends Entity {
     private String json;
     private int[][] tiles;
 
+    // Size of the tile
+    private float size;
+
     // Size of the level in tiles.
     public static int width = 41;
     public static int height = 41;
@@ -39,6 +42,7 @@ public class Map extends Entity {
     }
 
     private void generateMapTiles() {
+        size = game.getHeight() / 10;
         int[] data = level.getData(0);
         int i = 0;
         tiles = new int[level.getHeight()][level.getWidth()];
@@ -65,7 +69,7 @@ public class Map extends Entity {
                     // Load/decode bitmaps before we first draw them.
                     spriteBitmaps[tile] = gv.getBitmapFromResource(spriteResourceIds[tile]);
                 }
-                gv.drawBitmap(spriteBitmaps[tile], (float) column - scrollX, (float) row - scrollY, 1, 1);
+                gv.drawBitmap(spriteBitmaps[tile], (float) column * size - scrollX, (float) row * size - scrollY, size, size);
             }
         }
     }

@@ -1,6 +1,12 @@
 package com.jessedewild.seekinglight.entities.characters;
 
-import com.jessedewild.seekinglight.entities.Character;
+import android.graphics.drawable.Drawable;
 
-public class Seeker extends Character {
+import com.jessedewild.seekinglight.lib.Entity;
+
+public class Seeker extends Entity {
+
+    private Drawable drawable;
+    private int health;
+
 }

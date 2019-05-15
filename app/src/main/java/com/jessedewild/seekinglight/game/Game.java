@@ -1,7 +1,5 @@
 package com.jessedewild.seekinglight.game;
 
-import com.google.gson.Gson;
-import com.jessedewild.seekinglight.constructors.Level;
 import com.jessedewild.seekinglight.entities.Background;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.entities.Scroller;
@@ -50,8 +48,8 @@ public class Game extends GameModel {
 
         scroller = new Scroller(this);
         scroller.setAutoScroll(autoScroll);
-        scroller.setX(new Gson().fromJson(json, Level.class).getLayers()[0].getX());
-        scroller.setY(new Gson().fromJson(json, Level.class).getLayers()[0].getY());
+//        scroller.setX(new Gson().fromJson(json, Level.class).getLayers()[0].getX());
+//        scroller.setY(new Gson().fromJson(json, Level.class).getLayers()[0].getY());
         addEntity(scroller);
 
         // Fire event to set initial value in scroll view

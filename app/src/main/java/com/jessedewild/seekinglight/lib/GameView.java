@@ -286,6 +286,6 @@ public class GameView extends View implements View.OnTouchListener {
             lastFpsLogTime = now;
         }
 
-        Log.i("XandY", "X: " + gameModel.getEntities(Scroller.class).get(0).x + "  - Y: " + gameModel.getEntities(Scroller.class).get(0).y);
+//        Log.i("XandY", "X: " + gameModel.getEntities(Scroller.class).get(0).x + "  - Y: " + gameModel.getEntities(Scroller.class).get(0).y);
     }
 }
