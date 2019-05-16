@@ -2,17 +2,26 @@ package com.jessedewild.seekinglight.game;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.jessedewild.seekinglight.R;
+import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameView;
+import com.jessedewild.seekinglight.utils.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 public class Activity extends AppCompatActivity {
 
     private Game game;
     private GameView gameView;
+    private ProgressBar healthBar;
+    private JoystickView joystick;
+    private Button attackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,43 @@ public class Activity extends AppCompatActivity {
             game.setJson(readJSONFile(1));
             game.setAutoScroll(false);
         }
+
+        /**
+         * Seeker settings
+         */
+//        seeker = game.getEntity(Seeker.class)
+
+        /**
+         * Health bar settings
+         */
+        healthBar = findViewById(R.id.healthBar);
+        healthBar.setMax(200);
+
+        /**
+         * Joystick settings
+         */
+        joystick = findViewById(R.id.joystick);
+        joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
+            @Override
+            public void onMove(int angle, int strength) {
+                if (angle > 45 && angle <= 135 && strength > 15) {
+                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.BACK);
+                } else if (angle > 135 && angle <= 225 && strength > 15) {
+                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.LEFT);
+                } else if (angle > 225 && angle <= 315 && strength > 15) {
+                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.FRONT);
+                } else if (strength > 15) {
+                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.RIGHT);
+                }
+//                System.out.println(game.getEntity(Seeker.class).getFacingPosition().toString());
+            }
+        });
+
+        /**
+         * Attack button settings
+         */
+        attackButton = findViewById(R.id.attack);
+        attackButton.setBackgroundResource(R.drawable.attackbutton);
     }
 
     @Override
@@ -52,9 +98,10 @@ public class Activity extends AppCompatActivity {
     }
 
     private String readJSONFile(int levelNum) {
+        String file = "maps/level" + levelNum + "/level" + levelNum + ".json";
         String json = null;
         try {
-            InputStream is = getAssets().open("maps/level1/level1.json");
+            InputStream is = getAssets().open(file);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);

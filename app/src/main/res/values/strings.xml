@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Rock Rocket</string>
+    <string name="hp">HP</string>
 </resources>

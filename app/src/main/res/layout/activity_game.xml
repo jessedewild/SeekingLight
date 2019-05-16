@@ -12,8 +12,54 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/healthBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="176dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/healthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/hp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/healthBar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/joystick"
+        android:layout_width="110dp"
+        android:layout_height="108dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        custom:JV_backgroundColor="#707070"
+        custom:JV_borderColor="#3F3F3F"
+        custom:JV_borderWidth="4dp"
+        custom:JV_buttonColor="#FF6E40"
+        custom:JV_buttonSizeRatio="15%"
+        custom:JV_fixedCenter="false"
+        custom:layout_constraintBottom_toBottomOf="parent"
+        custom:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/attack"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!--<TextView-->
         <!--android:id="@+id/scrollText"-->

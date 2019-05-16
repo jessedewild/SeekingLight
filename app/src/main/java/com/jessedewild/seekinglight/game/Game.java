@@ -1,6 +1,8 @@
 package com.jessedewild.seekinglight.game;
 
 import com.jessedewild.seekinglight.entities.Background;
+import com.jessedewild.seekinglight.entities.characters.Monster;
+import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.entities.Scroller;
 
@@ -11,6 +13,8 @@ public class Game extends GameModel {
     // GameModel state
     public Map map;
     public Scroller scroller;
+    public Seeker seeker;
+    public Monster monster;
     private String json;
     private boolean autoScroll;
 
@@ -51,6 +55,12 @@ public class Game extends GameModel {
 //        scroller.setX(new Gson().fromJson(json, Level.class).getLayers()[0].getX());
 //        scroller.setY(new Gson().fromJson(json, Level.class).getLayers()[0].getY());
         addEntity(scroller);
+
+        seeker = new Seeker(this);
+        addEntity(seeker);
+
+        monster = new Monster(this,5);
+        addEntity(monster);
 
         // Fire event to set initial value in scroll view
         for (Game.Listener listener : listeners) {
