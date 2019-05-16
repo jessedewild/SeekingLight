@@ -2,6 +2,8 @@ package com.jessedewild.seekinglight.game;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -39,10 +41,11 @@ public class Activity extends AppCompatActivity {
             game = new Game();
             game.setJson(readJSONFile(1));
             game.setAutoScroll(false);
+            game.setShowCharactersOnMap(true);
         }
 
         /**
-         * Seeker settings
+         * Seeker settings  `
          */
 //        seeker = game.getEntity(Seeker.class)
 
@@ -55,18 +58,39 @@ public class Activity extends AppCompatActivity {
         /**
          * Joystick settings
          */
+        final float moveSpeed = 0.25f;
         joystick = findViewById(R.id.joystick);
         joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-                if (angle > 45 && angle <= 135 && strength > 15) {
+                if (angle > 45 && angle <= 135 && strength > 0) {
                     game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.BACK);
-                } else if (angle > 135 && angle <= 225 && strength > 15) {
+                    game.getEntity(Seeker.class).setXandY(0, -moveSpeed / 100 * strength);
+
+//                    // Set drawable
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_bk1);
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_bk2);
+                } else if (angle > 135 && angle <= 225 && strength > 0) {
                     game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.LEFT);
-                } else if (angle > 225 && angle <= 315 && strength > 15) {
+                    game.getEntity(Seeker.class).setXandY(-moveSpeed / 100 * strength, 0);
+
+//                    // Set drawable
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_lf1);
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_lf2);
+                } else if (angle > 225 && angle <= 315 && strength > 0) {
                     game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.FRONT);
-                } else if (strength > 15) {
+                    game.getEntity(Seeker.class).setXandY(0, moveSpeed / 100 * strength);
+
+//                    // Set drawable
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_fr1);
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_fr2);
+                } else if (strength > 0) {
                     game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.RIGHT);
+                    game.getEntity(Seeker.class).setXandY(moveSpeed / 100 * strength, 0);
+
+//                    // Set drawable
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_rt1);
+//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_rt2);
                 }
 //                System.out.println(game.getEntity(Seeker.class).getFacingPosition().toString());
             }

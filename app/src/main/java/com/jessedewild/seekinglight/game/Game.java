@@ -17,6 +17,7 @@ public class Game extends GameModel {
     public Monster monster;
     private String json;
     private boolean autoScroll;
+    public boolean showCharactersOnMap;
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -74,5 +75,9 @@ public class Game extends GameModel {
 
     public void setAutoScroll(boolean autoScroll) {
         this.autoScroll = autoScroll;
+    }
+
+    public void setShowCharactersOnMap(boolean showCharactersOnMap) {
+        this.showCharactersOnMap = showCharactersOnMap;
     }
 }

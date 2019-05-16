@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameView;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.game.Game;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         game = new Game();
         ((Game) game).setJson(readJSONFile());
         ((Game) game).setAutoScroll(true);
+        ((Game) game).setShowCharactersOnMap(false);
 
         findViewById(R.id.spaceShooterText).setOnClickListener(new View.OnClickListener() {
             @Override
