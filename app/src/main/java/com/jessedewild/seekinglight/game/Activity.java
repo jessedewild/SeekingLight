@@ -2,14 +2,13 @@ package com.jessedewild.seekinglight.game;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.jessedewild.seekinglight.R;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameView;
+import com.jessedewild.seekinglight.utils.CollisionDetection;
 import com.jessedewild.seekinglight.utils.Constants;
 
 import java.io.IOException;
@@ -45,11 +44,6 @@ public class Activity extends AppCompatActivity {
         }
 
         /**
-         * Seeker settings  `
-         */
-//        seeker = game.getEntity(Seeker.class)
-
-        /**
          * Health bar settings
          */
         healthBar = findViewById(R.id.healthBar);
@@ -63,36 +57,26 @@ public class Activity extends AppCompatActivity {
         joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
+                Seeker seeker = game.getEntity(Seeker.class);
+                Map map = game.getEntity(Map.class);
+
                 if (angle > 45 && angle <= 135 && strength > 0) {
-                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.BACK);
-                    game.getEntity(Seeker.class).setXandY(0, -moveSpeed / 100 * strength);
-
-//                    // Set drawable
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_bk1);
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_bk2);
+                    seeker.setFacingPosition(Constants.FACING_POSITION.BACK);
+//                    seeker.move(0, -moveSpeed / 100 * strength);
+                    map.setScroller(0, -moveSpeed / 100 * strength);
                 } else if (angle > 135 && angle <= 225 && strength > 0) {
-                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.LEFT);
-                    game.getEntity(Seeker.class).setXandY(-moveSpeed / 100 * strength, 0);
-
-//                    // Set drawable
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_lf1);
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_lf2);
+                    seeker.setFacingPosition(Constants.FACING_POSITION.LEFT);
+//                    seeker.move(-moveSpeed / 100 * strength, 0);
+                    map.setScroller(-moveSpeed / 100 * strength, 0);
                 } else if (angle > 225 && angle <= 315 && strength > 0) {
-                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.FRONT);
-                    game.getEntity(Seeker.class).setXandY(0, moveSpeed / 100 * strength);
-
-//                    // Set drawable
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_fr1);
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_fr2);
+                    seeker.setFacingPosition(Constants.FACING_POSITION.FRONT);
+//                    seeker.move(0, moveSpeed / 100 * strength);
+                    map.setScroller(0, moveSpeed / 100 * strength);
                 } else if (strength > 0) {
-                    game.getEntity(Seeker.class).setFacingPosition(Constants.FACING_POSITION.RIGHT);
-                    game.getEntity(Seeker.class).setXandY(moveSpeed / 100 * strength, 0);
-
-//                    // Set drawable
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_rt1);
-//                    game.getEntity(Seeker.class).setDrawable(R.drawable.npc6_rt2);
+                    seeker.setFacingPosition(Constants.FACING_POSITION.RIGHT);
+//                    seeker.move(moveSpeed / 100 * strength, 0);
+                    map.setScroller(moveSpeed / 100 * strength, 0);
                 }
-//                System.out.println(game.getEntity(Seeker.class).getFacingPosition().toString());
             }
         });
 

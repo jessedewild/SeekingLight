@@ -1,6 +1,7 @@
 package com.jessedewild.seekinglight.game;
 
-import com.jessedewild.seekinglight.entities.Background;
+import com.google.gson.Gson;
+import com.jessedewild.seekinglight.constructors.Level;
 import com.jessedewild.seekinglight.entities.characters.Monster;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameModel;
@@ -16,8 +17,7 @@ public class Game extends GameModel {
     public Seeker seeker;
     public Monster monster;
     private String json;
-    private boolean autoScroll;
-    public boolean showCharactersOnMap;
+    private boolean autoScroll, showCharactersOnMap;
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -35,7 +35,7 @@ public class Game extends GameModel {
     @Override
     public float getWidth() {
         // Width is always 8 units.
-        return 8f;
+        return 10f;
     }
 
     @Override
@@ -46,15 +46,12 @@ public class Game extends GameModel {
 
     @Override
     public void start() {
-        addEntity(new Background(this));
-
         map = new Map(this, json);
+        map.setScroller(new Gson().fromJson(json, Level.class).getLayers()[0].getX(),new Gson().fromJson(json, Level.class).getLayers()[0].getY());
         addEntity(map);
 
         scroller = new Scroller(this);
         scroller.setAutoScroll(autoScroll);
-//        scroller.setX(new Gson().fromJson(json, Level.class).getLayers()[0].getX());
-//        scroller.setY(new Gson().fromJson(json, Level.class).getLayers()[0].getY());
         addEntity(scroller);
 
         seeker = new Seeker(this);
@@ -63,18 +60,26 @@ public class Game extends GameModel {
         monster = new Monster(this,5);
         addEntity(monster);
 
-        // Fire event to set initial value in scroll view
-        for (Game.Listener listener : listeners) {
-            listener.scrollChanged();
-        }
+//        // Fire event to set initial value in scroll view
+//        for (Game.Listener listener : listeners) {
+//            listener.scrollChanged();
+//        }
     }
 
     public void setJson(String json) {
         this.json = json;
     }
 
+    public boolean isAutoScroll() {
+        return autoScroll;
+    }
+
     public void setAutoScroll(boolean autoScroll) {
         this.autoScroll = autoScroll;
+    }
+
+    public boolean isShowCharactersOnMap() {
+        return showCharactersOnMap;
     }
 
     public void setShowCharactersOnMap(boolean showCharactersOnMap) {

@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.jessedewild.seekinglight.entities.Scroller;
+import com.jessedewild.seekinglight.entities.characters.Seeker;
 
 public class GameView extends View implements View.OnTouchListener {
 
@@ -286,6 +287,6 @@ public class GameView extends View implements View.OnTouchListener {
             lastFpsLogTime = now;
         }
 
-//        Log.i("XandY", "X: " + gameModel.getEntities(Scroller.class).get(0).x + "  - Y: " + gameModel.getEntities(Scroller.class).get(0).y);
+//        Log.i("XandY", "X: " + gameModel.getEntity(Seeker.class).getXPos() + "  - Y: " + gameModel.getEntity(Seeker.class).getYPos());
     }
 }

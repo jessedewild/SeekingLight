@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameView;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.game.Game;
