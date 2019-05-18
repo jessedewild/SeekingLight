@@ -10,8 +10,8 @@
          "type":"tilelayer",
          "visible":true,
          "width":41,
-         "x":31,
-         "y":41
+         "x":35.462666,
+         "y":75.76209
         }],
  "nextlayerid":3,
  "nextobjectid":1,
@@ -23,7 +23,7 @@
         {
          "firstgid":1,
          "source":"floor.tsx"
-        }, 
+        },
         {
          "firstgid":2,
          "source":"wall.tsx"

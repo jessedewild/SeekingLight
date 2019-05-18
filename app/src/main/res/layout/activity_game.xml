@@ -12,72 +12,94 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/attack"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/joystick"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:JV_backgroundColor="#707070"
+        app:JV_borderColor="#3F3F3F"
+        app:JV_borderWidth="4dp"
+        app:JV_buttonColor="#FF6E40"
+        app:JV_buttonSizeRatio="15%"
+        app:JV_fixedCenter="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ProgressBar
         android:id="@+id/healthBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="176dp"
-        android:layout_height="16dp"
+        android:layout_width="186dp"
+        android:layout_height="21dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/healthText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="23dp"
+        android:layout_height="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:text="@string/hp"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/healthBar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/joystick"
-        android:layout_width="110dp"
-        android:layout_height="108dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        custom:JV_backgroundColor="#707070"
-        custom:JV_borderColor="#3F3F3F"
-        custom:JV_borderWidth="4dp"
-        custom:JV_buttonColor="#FF6E40"
-        custom:JV_buttonSizeRatio="15%"
-        custom:JV_fixedCenter="false"
-        custom:layout_constraintBottom_toBottomOf="parent"
-        custom:layout_constraintEnd_toEndOf="parent" />
+    <ImageView
+        android:id="@+id/coin"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/coins"
+        app:layout_constraintTop_toBottomOf="@+id/healthBar"
+        app:srcCompat="@drawable/coin" />
 
-    <Button
-        android:id="@+id/attack"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/coins"
+        android:layout_width="48dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:text=""
+        android:textAlignment="viewStart"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/gameView"
+        app:layout_constraintTop_toBottomOf="@+id/healthBar" />
 
     <!--<TextView-->
-        <!--android:id="@+id/scrollText"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:elegantTextHeight="false"-->
-        <!--android:shadowColor="@android:color/black"-->
-        <!--android:shadowDx="1"-->
-        <!--android:shadowDy="1"-->
-        <!--android:shadowRadius="2"-->
-        <!--android:text="0.0"-->
-        <!--android:textColor="@android:color/background_light"-->
-        <!--android:textIsSelectable="false"-->
-        <!--android:textSize="30sp"-->
-        <!--android:textStyle="bold"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <!--android:id="@+id/scrollText"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:layout_marginEnd="16dp"-->
+    <!--android:elegantTextHeight="false"-->
+    <!--android:shadowColor="@android:color/black"-->
+    <!--android:shadowDx="1"-->
+    <!--android:shadowDy="1"-->
+    <!--android:shadowRadius="2"-->
+    <!--android:text="0.0"-->
+    <!--android:textColor="@android:color/background_light"-->
+    <!--android:textIsSelectable="false"-->
+    <!--android:textSize="30sp"-->
+    <!--android:textStyle="bold"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
 
 </android.support.constraint.ConstraintLayout>

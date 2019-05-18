@@ -5,8 +5,8 @@ import com.jessedewild.seekinglight.lib.Entity;
 public class Tile extends Entity {
 
     private int firstgid;
-    private int x;
-    private int y;
+    private float x;
+    private float y;
 
     public Tile(int firstgid) {
         this.firstgid = firstgid;
@@ -16,15 +16,15 @@ public class Tile extends Entity {
         return firstgid;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setXandY(int x, int y) {
+    public void setXandY(float x, float y) {
         this.x = x;
         this.y = y;
     }

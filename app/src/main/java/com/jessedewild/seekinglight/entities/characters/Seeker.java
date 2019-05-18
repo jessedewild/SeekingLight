@@ -9,7 +9,6 @@ import com.jessedewild.seekinglight.game.Game;
 import com.jessedewild.seekinglight.game.Map;
 import com.jessedewild.seekinglight.lib.Entity;
 import com.jessedewild.seekinglight.lib.GameView;
-import com.jessedewild.seekinglight.utils.CollisionDetection;
 import com.jessedewild.seekinglight.utils.Constants;
 
 public class Seeker extends Entity {
@@ -21,6 +20,7 @@ public class Seeker extends Entity {
     private final int[] drawables = {R.drawable.npc6_fr1, R.drawable.npc6_fr2, R.drawable.npc6_bk1, R.drawable.npc6_bk2, R.drawable.npc6_lf1, R.drawable.npc6_lf2, R.drawable.npc6_rt1, R.drawable.npc6_rt2};
     private Bitmap bitmap;
     private final float size = 1.3f;
+    private final float bitmapSize = (84 / size / 100);
 
     // Stats
     private int health;
@@ -28,14 +28,15 @@ public class Seeker extends Entity {
 
     // Position
     private Constants.FACING_POSITION facingPosition = Constants.FACING_POSITION.BACK;
-    private float xPos, yPos;
+    private float x;
+    private float y;
 
     public Seeker(Game game) {
         this.game = game;
         this.health = 200;
         this.damage = 50;
-        this.xPos = game.getWidth() / 2;
-        this.yPos = game.getHeight() / 2;
+        this.x = game.getWidth() / 2 - bitmapSize;
+        this.y = game.getHeight() / 2 -bitmapSize;
     }
 
     public int[] getDrawables() {
@@ -66,17 +67,17 @@ public class Seeker extends Entity {
         return facingPosition;
     }
 
-    public float getXPos() {
-        return xPos;
+    public float getX() {
+        return x;
     }
 
-    public float getYPos() {
-        return yPos;
+    public float getY() {
+        return y;
     }
 
     public void move(float x, float y) {
-        this.xPos = xPos + x;
-        this.yPos = yPos + y;
+        this.x = this.x + x;
+        this.y = this.y + y;
     }
 
     @Override
@@ -91,41 +92,54 @@ public class Seeker extends Entity {
             bitmap = gv.getBitmapFromResource(drawables[6]);
         }
 
-        if (game.isShowCharactersOnMap()) gv.drawBitmap(bitmap, xPos, yPos, size, size);
+        if (game.isShowCharactersOnMap()) gv.drawBitmap(bitmap, x, y, size, size);
     }
 
-    private boolean collision() {
-        float futureX, futureY;
-        if (facingPosition.equals(Constants.FACING_POSITION.FRONT)) {
-            futureX = xPos;
-            futureY = yPos + 1.5f;
-        } else if (facingPosition.equals(Constants.FACING_POSITION.BACK)) {
-            futureX = xPos;
-            futureY = yPos + -1.5f;
-        } else if (facingPosition.equals(Constants.FACING_POSITION.LEFT)) {
-            futureX = xPos + -1f;
-            futureY = yPos + 0.5f;
-        } else {
-            futureX = xPos + 2f;
-            futureY = yPos;
-        }
-
+    public boolean collision() {
         Map map = game.getEntity(Map.class);
-        Tile mainTile = map.getTile((int) xPos, (int) yPos);
-        Tile futureTile = map.getTile((int) futureX, (int) futureY);
+        float firstFutureX = 0, firstFutureY = 0, secondFutureX = 0, secondFutureY = 0;
+        float seekerX = (map.x + game.getWidthByTwo() - bitmapSize) / map.size;
+        float seekerY = (map.y + game.getHeightByTwo() - bitmapSize) / map.size;
+        float bitmapWidth = (float) bitmap.getWidth() / 100 - bitmapSize / 2;
+        float bitmapHeight = (float) bitmap.getHeight() / 100 - bitmapSize / 2;
+        float distance = 0.022f;
 
-        Log.i("POSITIONS", facingPosition +
-                "\nMAIN POS " + xPos + " " + yPos + " " + mainTile.getFirstgid() +
-                "\nFUTURE   " + futureX + " " + futureY + " " + futureTile.getFirstgid() +
-                "\nDISTANCE: " + distance(futureX, futureY, xPos, yPos));
+        if (facingPosition.equals(Constants.FACING_POSITION.BACK)) {
+            firstFutureX = seekerX;
+            firstFutureY = seekerY + -distance;
 
-        if (mainTile.getFirstgid() == 1 && distance(futureX, futureY, xPos, yPos) > 1) {
-            return false;
-        } else if (futureTile.getFirstgid() == 2 && distance(futureX, futureY, xPos, yPos) == 1) {
-            return true;
-        } else {
-            return false;
+            secondFutureX = firstFutureX + bitmapHeight;
+            secondFutureY = firstFutureY;
+        } else if (facingPosition.equals(Constants.FACING_POSITION.LEFT)) {
+            firstFutureX = seekerX + -distance;
+            firstFutureY = seekerY;
+
+            secondFutureX = firstFutureX;
+            secondFutureY = firstFutureY + bitmapHeight;
+        } else if (facingPosition.equals(Constants.FACING_POSITION.FRONT)) {
+            firstFutureX = seekerX + bitmapWidth;
+            firstFutureY = seekerY + bitmapHeight + distance;
+
+            secondFutureX = firstFutureX; // + bitmapWidth;
+            secondFutureY = firstFutureY;
+        } else if (facingPosition.equals(Constants.FACING_POSITION.RIGHT)) {
+            firstFutureX = seekerX + bitmapWidth + distance;
+            firstFutureY = seekerY + bitmapHeight;
+
+            secondFutureX = firstFutureX;
+            secondFutureY = firstFutureY; // + bitmapHeight;
         }
+
+        Tile firstFutureTile, secondFutureTile;
+        try {
+            firstFutureTile = map.getTile(firstFutureX, firstFutureY, true);
+            secondFutureTile = map.getTile(secondFutureX, secondFutureY, true);
+
+            return firstFutureTile.getFirstgid() == 2 || secondFutureTile.getFirstgid() == 2;
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
+        return false;
     }
 
     private float distance(float x1, float y1, float x2, float y2) {

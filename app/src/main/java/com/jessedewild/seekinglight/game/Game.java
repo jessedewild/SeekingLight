@@ -1,6 +1,7 @@
 package com.jessedewild.seekinglight.game;
 
 import com.google.gson.Gson;
+import com.jessedewild.seekinglight.constructors.Layer;
 import com.jessedewild.seekinglight.constructors.Level;
 import com.jessedewild.seekinglight.entities.characters.Monster;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
@@ -47,7 +48,8 @@ public class Game extends GameModel {
     @Override
     public void start() {
         map = new Map(this, json);
-        map.setScroller(new Gson().fromJson(json, Level.class).getLayers()[0].getX(),new Gson().fromJson(json, Level.class).getLayers()[0].getY());
+        Layer layer = new Gson().fromJson(json, Level.class).getLayers()[0];
+        map.setPos(layer.getX(), layer.getY());
         addEntity(map);
 
         scroller = new Scroller(this);
@@ -57,13 +59,21 @@ public class Game extends GameModel {
         seeker = new Seeker(this);
         addEntity(seeker);
 
-        monster = new Monster(this,5);
+        monster = new Monster(this, 5);
         addEntity(monster);
 
-//        // Fire event to set initial value in scroll view
-//        for (Game.Listener listener : listeners) {
-//            listener.scrollChanged();
-//        }
+        // Fire event to set initial value in scroll view
+        for (Game.Listener listener : listeners) {
+            listener.scrollChanged();
+        }
+    }
+
+    public float getWidthByTwo() {
+        return 10f / 2;
+    }
+
+    public float getHeightByTwo() {
+        return (actualHeight / actualWidth * getWidth()) / 2;
     }
 
     public void setJson(String json) {
