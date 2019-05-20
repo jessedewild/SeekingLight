@@ -1,19 +1,21 @@
 package com.jessedewild.seekinglight.game;
 
-import android.widget.TextView;
-
 import com.google.gson.Gson;
+import com.jessedewild.seekinglight.compounds.CoinsView;
 import com.jessedewild.seekinglight.constructors.Level;
+import com.jessedewild.seekinglight.entities.Background;
 import com.jessedewild.seekinglight.entities.characters.Monster;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.entities.Scroller;
+import com.jessedewild.seekinglight.utils.Constants;
 
 import java.util.ArrayList;
 
 public class Game extends GameModel {
 
     // GameModel state
+    private Background background;
     public Map map;
     public Scroller scroller;
     public Seeker seeker;
@@ -21,7 +23,7 @@ public class Game extends GameModel {
     private String json;
     private boolean autoScroll, showCharactersOnMap;
     private float deviceWidth, deviceHeight;
-    private TextView coinsView;
+    private CoinsView coinsView;
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -50,21 +52,28 @@ public class Game extends GameModel {
 
     @Override
     public void start() {
+        // Background entity
+        background = new Background(this);
+        addEntity(background);
+
+        // Map entity
         map = new Map(this, json);
         Level.LevelProperty[] levelProperty = new Gson().fromJson(json, Level.class).getProperties();
-        map.setPos(levelProperty[1].getValue(), levelProperty[2].getValue());
-//        float layerX = layer.getX() / 1080.0f * (actualWidth * (actualHeight / 1794.0f));
-//        float layerY = layer.getY() / 1794.0f * actualHeight;
-//        map.setPos(layerX, layerY);
+        float x = levelProperty[1].getValue() / 10.0f * getWidth();
+        float y = levelProperty[2].getValue() + ((16.61111f - getHeight()) / Constants.mainMapSize);
+        map.setPos(x, y);
         addEntity(map);
 
+        // Scroller entity for positioning
         scroller = new Scroller(this);
         scroller.setAutoScroll(autoScroll);
         addEntity(scroller);
 
+        // Seeker entity
         seeker = new Seeker(this);
         addEntity(seeker);
 
+        // Monster entity
         monster = new Monster(this, 5);
         addEntity(monster);
 
@@ -107,11 +116,11 @@ public class Game extends GameModel {
         this.deviceHeight = deviceHeight;
     }
 
-    public TextView getCoinsView() {
+    public CoinsView getCoinsView() {
         return coinsView;
     }
 
-    public void setCoinsView(TextView coinsView) {
+    public void setCoinsView(CoinsView coinsView) {
         this.coinsView = coinsView;
     }
 }

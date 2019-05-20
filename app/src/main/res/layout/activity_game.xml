@@ -19,10 +19,10 @@
 
     <Button
         android:id="@+id/attack"
-        android:layout_width="122dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -61,26 +61,13 @@
         app:layout_constraintEnd_toStartOf="@+id/healthBar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/coin"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_marginTop="5dp"
+    <com.jessedewild.seekinglight.compounds.CoinsView
+        android:id="@+id/gameCoinsView"
+        android:layout_width="76dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/coins"
-        app:layout_constraintTop_toBottomOf="@+id/healthBar"
-        app:srcCompat="@drawable/coin" />
-
-    <TextView
-        android:id="@+id/coins"
-        android:layout_width="48dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="6dp"
-        android:text=""
-        android:textAlignment="viewStart"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/gameView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/healthBar" />
 
     <!--<TextView-->

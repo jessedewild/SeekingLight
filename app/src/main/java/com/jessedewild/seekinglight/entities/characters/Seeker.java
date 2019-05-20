@@ -159,7 +159,7 @@ public class Seeker extends Entity {
                     if (obtainable instanceof Coin) {
                         Log.e("COIN", "COIN!");
                         Constants.coins = Constants.coins + 1;
-                        game.getCoinsView().setText(String.valueOf(Constants.coins));
+                        game.getCoinsView().setCoins(String.valueOf(Constants.coins));
                         map.removeObtainable(obtainable);
                     } else if (obtainable instanceof Star) {
                         Log.e("STAR", "STAR!");

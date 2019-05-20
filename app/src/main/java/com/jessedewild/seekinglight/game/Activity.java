@@ -7,11 +7,11 @@ import android.util.Log;
 import android.view.Display;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jessedewild.seekinglight.R;
+import com.jessedewild.seekinglight.compounds.CoinsView;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameView;
 import com.jessedewild.seekinglight.utils.Constants;
@@ -29,7 +29,7 @@ public class Activity extends AppCompatActivity {
     private Game game;
     private GameView gameView;
     private ProgressBar healthBar;
-    private static TextView coinsView;
+    private static CoinsView coinsView;
     private JoystickView joystick;
     private Button attackButton;
     private float deviceWidth, deviceHeight;
@@ -66,8 +66,8 @@ public class Activity extends AppCompatActivity {
         /**
          * Coins settings
          */
-        coinsView = findViewById(R.id.coins);
-        coinsView.setText(String.valueOf(Constants.coins));
+        coinsView = findViewById(R.id.gameCoinsView);
+        coinsView.setCoins(String.valueOf(Constants.coins));
 
         // If a running game has been serialized (because it has been paused for
         // a long time, or because of an orientation change), recreate the Game
@@ -114,7 +114,7 @@ public class Activity extends AppCompatActivity {
          * Attack button settings
          */
         attackButton = findViewById(R.id.attack);
-        attackButton.setBackgroundResource(R.drawable.attackbutton);
+        attackButton.setBackgroundResource(R.drawable.attack_button);
     }
 
     @Override

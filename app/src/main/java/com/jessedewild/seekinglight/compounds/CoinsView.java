@@ -40,4 +40,8 @@ public class CoinsView extends ConstraintLayout {
     public TextView getCoins() {
         return coins;
     }
+
+    public void setCoins(String text) {
+        this.coins.setText(text);
+    }
 }
