@@ -1,7 +1,8 @@
 package com.jessedewild.seekinglight.game;
 
+import android.widget.TextView;
+
 import com.google.gson.Gson;
-import com.jessedewild.seekinglight.constructors.Layer;
 import com.jessedewild.seekinglight.constructors.Level;
 import com.jessedewild.seekinglight.entities.characters.Monster;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
@@ -19,6 +20,8 @@ public class Game extends GameModel {
     public Monster monster;
     private String json;
     private boolean autoScroll, showCharactersOnMap;
+    private float deviceWidth, deviceHeight;
+    private TextView coinsView;
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -48,8 +51,11 @@ public class Game extends GameModel {
     @Override
     public void start() {
         map = new Map(this, json);
-        Layer layer = new Gson().fromJson(json, Level.class).getLayers()[0];
-        map.setPos(layer.getX(), layer.getY());
+        Level.LevelProperty[] levelProperty = new Gson().fromJson(json, Level.class).getProperties();
+        map.setPos(levelProperty[1].getValue(), levelProperty[2].getValue());
+//        float layerX = layer.getX() / 1080.0f * (actualWidth * (actualHeight / 1794.0f));
+//        float layerY = layer.getY() / 1794.0f * actualHeight;
+//        map.setPos(layerX, layerY);
         addEntity(map);
 
         scroller = new Scroller(this);
@@ -94,5 +100,18 @@ public class Game extends GameModel {
 
     public void setShowCharactersOnMap(boolean showCharactersOnMap) {
         this.showCharactersOnMap = showCharactersOnMap;
+    }
+
+    public void setDeviceSize(float deviceWidth, float deviceHeight) {
+        this.deviceWidth = deviceWidth;
+        this.deviceHeight = deviceHeight;
+    }
+
+    public TextView getCoinsView() {
+        return coinsView;
+    }
+
+    public void setCoinsView(TextView coinsView) {
+        this.coinsView = coinsView;
     }
 }

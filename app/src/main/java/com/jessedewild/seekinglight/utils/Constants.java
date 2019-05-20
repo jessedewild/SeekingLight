@@ -10,4 +10,11 @@ public class Constants {
         LEFT,
         RIGHT
     }
+
+    public static final float mainMapSize = 2.0763888f;
+
+    @Override
+    public String toString() {
+        return String.valueOf(coins);
+    }
 }

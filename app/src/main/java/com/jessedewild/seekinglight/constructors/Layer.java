@@ -1,10 +1,11 @@
 package com.jessedewild.seekinglight.constructors;
 
+import com.jessedewild.seekinglight.entities.Obtainable;
+
 public class Layer {
 
     private int[] data;
     private int height;
-    private int id;
     private String name;
     private int opacity;
     private String type;
@@ -12,11 +13,11 @@ public class Layer {
     private int width;
     private float x;
     private float y;
+    private Obtainable[] objects;
 
-    public Layer(int[] data, int height, int id, String name, int opacity, String type, boolean visible, int width, float x, float y) {
+    public Layer(int[] data, int height, String name, int opacity, String type, boolean visible, int width, float x, float y, Obtainable[] objects) {
         this.data = data;
         this.height = height;
-        this.id = id;
         this.name = name;
         this.opacity = opacity;
         this.type = type;
@@ -24,6 +25,7 @@ public class Layer {
         this.width = width;
         this.x = x;
         this.y = y;
+        this.objects = objects;
     }
 
     public int[] getData() {
@@ -32,10 +34,6 @@ public class Layer {
 
     public int getHeight() {
         return height;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
@@ -64,5 +62,9 @@ public class Layer {
 
     public float getY() {
         return y;
+    }
+
+    public Obtainable[] getObjects() {
+        return objects;
     }
 }

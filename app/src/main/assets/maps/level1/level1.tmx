@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="41" height="41" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="41" height="41" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="41">
+ <properties>
+  <property name="mapLength" type="float" value="5248"/>
+  <property name="startingPosX" type="float" value="35.462666"/>
+  <property name="startingPosY" type="float" value="75.76209"/>
+ </properties>
  <tileset firstgid="1" source="../../textures/floor.tsx"/>
  <tileset firstgid="2" source="../../textures/wall.tsx"/>
- <layer id="2" name="Tile Layer 1" width="41" height="41">
+ <layer id="2" name="Maze" width="41" height="41">
   <data encoding="csv">
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,2,
@@ -47,4 +52,37 @@
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2
 </data>
  </layer>
+ <objectgroup id="5" name="Obtainables">
+  <object id="5" x="158" y="414" width="64" height="64"/>
+  <object id="6" x="1178" y="416" width="64" height="64"/>
+  <object id="7" x="666.121" y="2205.55" width="64" height="64"/>
+  <object id="8" x="417" y="2712" width="64" height="64"/>
+  <object id="9" x="3740" y="4512" width="64" height="64"/>
+  <object id="10" x="3488" y="4000" width="64" height="64"/>
+  <object id="11" x="1692" y="4248" width="64" height="64"/>
+  <object id="12" x="928" y="3996" width="64" height="64"/>
+  <object id="13" x="416" y="3228" width="64" height="64"/>
+  <object id="14" x="2456" y="3228" width="64" height="64"/>
+  <object id="15" x="3232" y="1952" width="64" height="64"/>
+  <object id="16" x="3224" y="1696" width="64" height="64"/>
+  <object id="17" x="1952" y="1436" width="64" height="64"/>
+  <object id="18" x="3231.88" y="160.848" width="64" height="64"/>
+  <object id="19" x="5024" y="158" width="64" height="64"/>
+  <object id="20" x="4764.97" y="1449.82" width="64" height="64"/>
+  <object id="21" x="4755.88" y="2464.97" width="64" height="64"/>
+  <object id="22" x="3998.67" y="2720" width="64" height="64"/>
+  <object id="23" x="1948" y="3484" width="64" height="64"/>
+  <object id="24" x="2972" y="4252" width="64" height="64"/>
+  <object id="25" x="5019.03" y="4507.88" width="64" height="64"/>
+  <object id="26" x="2460" y="416" width="64" height="64"/>
+  <object id="27" x="4508" y="412" width="64" height="64"/>
+  <object id="28" x="1444" y="1692" width="64" height="64"/>
+  <object id="29" x="2460" y="1436" width="64" height="64"/>
+  <object id="35" x="2205.39" y="5020.55" width="64" height="64"/>
+  <object id="36" x="410.424" y="4768" width="64" height="64"/>
+  <object id="37" x="3228.61" y="2719.52" width="64" height="64"/>
+  <object id="38" x="925.333" y="1441.64" width="64" height="64"/>
+  <object id="39" x="4248" y="1184" width="64" height="64"/>
+  <object id="40" x="2460" y="4766" width="64" height="64"/>
+ </objectgroup>
 </map>

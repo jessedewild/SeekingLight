@@ -8,22 +8,24 @@ public class Level {
     private int nextlayerid;
     private int nextobjectid;
     private String orientation;
+    private LevelProperty[] properties;
     private String renderorder;
     private String tiledversion;
-    private String tileheight;
+    private int tileheight;
     private Tileset[] tilesets;
     private int tilewidth;
     private String type;
     private double version;
     private int width;
 
-    public Level(int height, boolean infinite, Layer[] layers, int nextlayerid, int nextobjectid, String orientation, String renderorder, String tiledversion, String tileheight, Tileset[] tilesets, int tilewidth, String type, double version, int width) {
+    public Level(int height, boolean infinite, Layer[] layers, int nextlayerid, int nextobjectid, String orientation, LevelProperty[] properties, String renderorder, String tiledversion, int tileheight, Tileset[] tilesets, int tilewidth, String type, double version, int width) {
         this.height = height;
         this.infinite = infinite;
         this.layers = layers;
         this.nextlayerid = nextlayerid;
         this.nextobjectid = nextobjectid;
         this.orientation = orientation;
+        this.properties = properties;
         this.renderorder = renderorder;
         this.tiledversion = tiledversion;
         this.tileheight = tileheight;
@@ -62,6 +64,10 @@ public class Level {
         return orientation;
     }
 
+    public LevelProperty[] getProperties() {
+        return properties;
+    }
+
     public String getRenderorder() {
         return renderorder;
     }
@@ -70,7 +76,7 @@ public class Level {
         return tiledversion;
     }
 
-    public String getTileheight() {
+    public int getTileheight() {
         return tileheight;
     }
 
@@ -92,5 +98,23 @@ public class Level {
 
     public int getWidth() {
         return width;
+    }
+
+    public class LevelProperty {
+        private String name;
+        private float value;
+
+        public LevelProperty(String name, float value) {
+            this.name = name;
+            this.value = value;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public float getValue() {
+            return value;
+        }
     }
 }

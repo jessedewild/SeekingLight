@@ -2,9 +2,15 @@ package com.jessedewild.seekinglight.entities.characters;
 
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jessedewild.seekinglight.R;
+import com.jessedewild.seekinglight.constructors.Level;
+import com.jessedewild.seekinglight.entities.Obtainable;
 import com.jessedewild.seekinglight.entities.Tile;
+import com.jessedewild.seekinglight.entities.obtainables.Coin;
+import com.jessedewild.seekinglight.entities.obtainables.Star;
 import com.jessedewild.seekinglight.game.Game;
 import com.jessedewild.seekinglight.game.Map;
 import com.jessedewild.seekinglight.lib.Entity;
@@ -19,7 +25,7 @@ public class Seeker extends Entity {
     // Model
     private final int[] drawables = {R.drawable.npc6_fr1, R.drawable.npc6_fr2, R.drawable.npc6_bk1, R.drawable.npc6_bk2, R.drawable.npc6_lf1, R.drawable.npc6_lf2, R.drawable.npc6_rt1, R.drawable.npc6_rt2};
     private Bitmap bitmap;
-    private final float size = 1.3f;
+    public final float size = 1.3f;
     private final float bitmapSize = (84 / size / 100);
 
     // Stats
@@ -30,13 +36,15 @@ public class Seeker extends Entity {
     private Constants.FACING_POSITION facingPosition = Constants.FACING_POSITION.BACK;
     private float x;
     private float y;
+    private float seekerX;
+    private float seekerY;
 
     public Seeker(Game game) {
         this.game = game;
         this.health = 200;
         this.damage = 50;
         this.x = game.getWidth() / 2 - bitmapSize;
-        this.y = game.getHeight() / 2 -bitmapSize;
+        this.y = game.getHeight() / 2 - bitmapSize;
     }
 
     public int[] getDrawables() {
@@ -98,8 +106,8 @@ public class Seeker extends Entity {
     public boolean collision() {
         Map map = game.getEntity(Map.class);
         float firstFutureX = 0, firstFutureY = 0, secondFutureX = 0, secondFutureY = 0;
-        float seekerX = (map.x + game.getWidthByTwo() - bitmapSize) / map.size;
-        float seekerY = (map.y + game.getHeightByTwo() - bitmapSize) / map.size;
+        seekerX = (map.x + game.getWidthByTwo() - bitmapSize) / map.size;
+        seekerY = (map.y + game.getHeightByTwo() - bitmapSize) / map.size;
         float bitmapWidth = (float) bitmap.getWidth() / 100 - bitmapSize / 2;
         float bitmapHeight = (float) bitmap.getHeight() / 100 - bitmapSize / 2;
         float distance = 0.022f;
@@ -108,26 +116,26 @@ public class Seeker extends Entity {
             firstFutureX = seekerX;
             firstFutureY = seekerY + -distance;
 
-            secondFutureX = firstFutureX + bitmapHeight;
+            secondFutureX = firstFutureX + bitmapHeight + distance * 6;
             secondFutureY = firstFutureY;
         } else if (facingPosition.equals(Constants.FACING_POSITION.LEFT)) {
             firstFutureX = seekerX + -distance;
             firstFutureY = seekerY;
 
             secondFutureX = firstFutureX;
-            secondFutureY = firstFutureY + bitmapHeight;
+            secondFutureY = firstFutureY + bitmapHeight + distance * 6;
         } else if (facingPosition.equals(Constants.FACING_POSITION.FRONT)) {
-            firstFutureX = seekerX + bitmapWidth;
-            firstFutureY = seekerY + bitmapHeight + distance;
+            firstFutureX = seekerX + bitmapWidth + distance * 6;
+            firstFutureY = seekerY + bitmapHeight + distance * 7;
 
-            secondFutureX = firstFutureX; // + bitmapWidth;
+            secondFutureX = firstFutureX - bitmapWidth;
             secondFutureY = firstFutureY;
         } else if (facingPosition.equals(Constants.FACING_POSITION.RIGHT)) {
-            firstFutureX = seekerX + bitmapWidth + distance;
-            firstFutureY = seekerY + bitmapHeight;
+            firstFutureX = seekerX + bitmapWidth + distance * 7;
+            firstFutureY = seekerY + bitmapHeight + distance * 6;
 
             secondFutureX = firstFutureX;
-            secondFutureY = firstFutureY; // + bitmapHeight;
+            secondFutureY = firstFutureY - bitmapHeight;
         }
 
         Tile firstFutureTile, secondFutureTile;
@@ -140,6 +148,25 @@ public class Seeker extends Entity {
             npe.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void tick() {
+        if (!game.isAutoScroll()) {
+            Map map = game.getEntity(Map.class);
+            for (Obtainable obtainable : map.getObtainables()) {
+                if (distance(obtainable.getMapX(), obtainable.getMapY(), seekerX, seekerY) < obtainable.getSize()) {
+                    if (obtainable instanceof Coin) {
+                        Log.e("COIN", "COIN!");
+                        Constants.coins = Constants.coins + 1;
+                        game.getCoinsView().setText(String.valueOf(Constants.coins));
+                        map.removeObtainable(obtainable);
+                    } else if (obtainable instanceof Star) {
+                        Log.e("STAR", "STAR!");
+                    }
+                }
+            }
+        }
     }
 
     private float distance(float x1, float y1, float x2, float y2) {
