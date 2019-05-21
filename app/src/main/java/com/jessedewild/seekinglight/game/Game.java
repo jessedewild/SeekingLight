@@ -26,7 +26,6 @@ public class Game extends GameModel {
     public Fog fog;
     private String json;
     private boolean autoScroll, showCharactersOnMap, showFog;
-    private float deviceWidth, deviceHeight;
     private CoinsView coinsView;
 
     public Game(Context context) {
@@ -122,11 +121,6 @@ public class Game extends GameModel {
 
     public void setShowCharactersOnMap(boolean showCharactersOnMap) {
         this.showCharactersOnMap = showCharactersOnMap;
-    }
-
-    public void setDeviceSize(float deviceWidth, float deviceHeight) {
-        this.deviceWidth = deviceWidth;
-        this.deviceHeight = deviceHeight;
     }
 
     public CoinsView getCoinsView() {

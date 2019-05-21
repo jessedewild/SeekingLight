@@ -3,6 +3,7 @@ package com.jessedewild.seekinglight.utils;
 public class Constants {
 
     public static int coins;
+    public static int level = 1;
 
     public enum FACING_POSITION {
         FRONT,
@@ -10,8 +11,6 @@ public class Constants {
         LEFT,
         RIGHT
     }
-
-    public static final float mainMapSize = 2.0763888f;
 
     @Override
     public String toString() {
