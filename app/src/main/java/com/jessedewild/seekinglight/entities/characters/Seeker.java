@@ -154,18 +154,21 @@ public class Seeker extends Entity {
     public void tick() {
         if (!game.isAutoScroll()) {
             Map map = game.getEntity(Map.class);
+            Obtainable removeObtainable = null;
             for (Obtainable obtainable : map.getObtainables()) {
                 if (distance(obtainable.getMapX(), obtainable.getMapY(), seekerX, seekerY) < obtainable.getSize()) {
                     if (obtainable instanceof Coin) {
                         Log.e("COIN", "COIN!");
                         Constants.coins = Constants.coins + 1;
                         game.getCoinsView().setCoins(String.valueOf(Constants.coins));
-                        map.removeObtainable(obtainable);
+                        // TODO: java.util.ConcurrentModificationException
+                        removeObtainable = obtainable;
                     } else if (obtainable instanceof Star) {
                         Log.e("STAR", "STAR!");
                     }
                 }
             }
+            if (removeObtainable != null) map.removeObtainable(removeObtainable);
         }
     }
 

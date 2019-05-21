@@ -59,8 +59,8 @@ public class Game extends GameModel {
         // Map entity
         map = new Map(this, json);
         Level.LevelProperty[] levelProperty = new Gson().fromJson(json, Level.class).getProperties();
-        float x = levelProperty[1].getValue() / 10.0f * getWidth();
-        float y = levelProperty[2].getValue() + ((16.61111f - getHeight()) / Constants.mainMapSize);
+        float x = levelProperty[2].getValue() * map.size - getWidthByTwo() + 1f;
+        float y = levelProperty[3].getValue() * map.size - getHeightByTwo() + 1f;
         map.setPos(x, y);
         addEntity(map);
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="41" height="41" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="41">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="41" height="41" tilewidth="128" tileheight="128" infinite="0" nextlayerid="6" nextobjectid="42">
  <properties>
-  <property name="mapLength" type="float" value="5248"/>
-  <property name="startingPosX" type="float" value="35.462666"/>
-  <property name="startingPosY" type="float" value="75.76209"/>
+  <property name="endPosX" value="31"/>
+  <property name="endPosY" type="float" value="40"/>
+  <property name="startingPosX" type="float" value="19"/>
+  <property name="startingPosY" type="float" value="40"/>
  </properties>
  <tileset firstgid="1" source="../../textures/floor.tsx"/>
  <tileset firstgid="2" source="../../textures/wall.tsx"/>
@@ -84,5 +85,6 @@
   <object id="38" x="925.333" y="1441.64" width="64" height="64"/>
   <object id="39" x="4248" y="1184" width="64" height="64"/>
   <object id="40" x="2460" y="4766" width="64" height="64"/>
+  <object id="41" x="2068" y="4764" width="64" height="64"/>
  </objectgroup>
 </map>

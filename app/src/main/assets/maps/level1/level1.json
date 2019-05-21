@@ -358,6 +358,17 @@
                  "width":64,
                  "x":2460,
                  "y":4766
+                }, 
+                {
+                 "height":64,
+                 "id":41,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2068,
+                 "y":4764
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -366,23 +377,28 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":41,
+ "nextobjectid":42,
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"mapLength",
+         "name":"endPosX",
+         "type":"string",
+         "value":"31"
+        }, 
+        {
+         "name":"endPosY",
          "type":"float",
-         "value":5248
+         "value":40
         }, 
         {
          "name":"startingPosX",
          "type":"float",
-         "value":35.462666
+         "value":19
         }, 
         {
          "name":"startingPosY",
          "type":"float",
-         "value":75.76209
+         "value":40
         }],
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
