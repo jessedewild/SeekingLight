@@ -13,7 +13,6 @@ import com.jessedewild.seekinglight.entities.obtainables.Coin;
 import com.jessedewild.seekinglight.entities.obtainables.Star;
 import com.jessedewild.seekinglight.lib.Entity;
 import com.jessedewild.seekinglight.lib.GameView;
-import com.jessedewild.seekinglight.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ public class Map extends Entity {
     }
 
     private void generateMapTiles() {
-        size = Constants.mainMapSize; // game.getHeight() / 8;
+        size = game.getHeight() / 8;
         Log.e("Map Size:", "" + size);
 
         int[] data = level.getData(0);

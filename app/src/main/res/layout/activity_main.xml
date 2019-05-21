@@ -76,11 +76,11 @@
 
     <com.jessedewild.seekinglight.compounds.CoinsView
         android:id="@+id/mainCoinsView"
-        android:layout_width="129dp"
-        android:layout_height="27dp"
+        android:layout_width="83dp"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/upgradeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

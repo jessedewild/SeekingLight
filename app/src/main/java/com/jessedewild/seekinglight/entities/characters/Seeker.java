@@ -25,7 +25,7 @@ public class Seeker extends Entity {
     // Model
     private final int[] drawables = {R.drawable.npc6_fr1, R.drawable.npc6_fr2, R.drawable.npc6_bk1, R.drawable.npc6_bk2, R.drawable.npc6_lf1, R.drawable.npc6_lf2, R.drawable.npc6_rt1, R.drawable.npc6_rt2};
     private Bitmap bitmap;
-    public final float size = 1.3f;
+    public float size = 1.3f;
     private final float bitmapSize = (84 / size / 100);
 
     // Stats
@@ -90,6 +90,7 @@ public class Seeker extends Entity {
 
     @Override
     public void draw(GameView gv) {
+        size = game.getHeight() / 16f;
         if (facingPosition.equals(Constants.FACING_POSITION.FRONT)) {
             bitmap = gv.getBitmapFromResource(drawables[0]);
         } else if (facingPosition.equals(Constants.FACING_POSITION.BACK)) {
@@ -116,23 +117,23 @@ public class Seeker extends Entity {
             firstFutureX = seekerX;
             firstFutureY = seekerY + -distance;
 
-            secondFutureX = firstFutureX + bitmapHeight + distance * 6;
+            secondFutureX = firstFutureX + bitmapHeight + distance * size - distance;
             secondFutureY = firstFutureY;
         } else if (facingPosition.equals(Constants.FACING_POSITION.LEFT)) {
             firstFutureX = seekerX + -distance;
             firstFutureY = seekerY;
 
             secondFutureX = firstFutureX;
-            secondFutureY = firstFutureY + bitmapHeight + distance * 6;
+            secondFutureY = firstFutureY + bitmapHeight + distance * size - distance;
         } else if (facingPosition.equals(Constants.FACING_POSITION.FRONT)) {
-            firstFutureX = seekerX + bitmapWidth + distance * 6;
-            firstFutureY = seekerY + bitmapHeight + distance * 7;
+            firstFutureX = seekerX + bitmapWidth + distance * size;
+            firstFutureY = seekerY + bitmapHeight + distance * size - distance * 2;
 
             secondFutureX = firstFutureX - bitmapWidth;
             secondFutureY = firstFutureY;
         } else if (facingPosition.equals(Constants.FACING_POSITION.RIGHT)) {
-            firstFutureX = seekerX + bitmapWidth + distance * 7;
-            firstFutureY = seekerY + bitmapHeight + distance * 6;
+            firstFutureX = seekerX + bitmapWidth + distance * size - distance * 2;
+            firstFutureY = seekerY + bitmapHeight + distance * size;
 
             secondFutureX = firstFutureX;
             secondFutureY = firstFutureY - bitmapHeight;
