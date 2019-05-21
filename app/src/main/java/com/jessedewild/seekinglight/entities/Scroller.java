@@ -10,12 +10,14 @@ import com.jessedewild.seekinglight.game.Map;
 public class Scroller extends Entity {
 
     private Game game;
+    private Map map;
     public float x = 0;
     public float y = 0;
     public boolean autoScroll = false;
 
     public Scroller(Game game) {
         this.game = game;
+        this.map = game.getEntity(Map.class);
     }
 
     // Auto-scroll
@@ -31,16 +33,16 @@ public class Scroller extends Entity {
     }
 
     private void scroll(float deltaX, float deltaY) {
-        x = (x + deltaX) % Map.width;
-        y = (y + deltaY) % Map.height;
+        x = (x + deltaX) % map.width;
+        y = (y + deltaY) % map.height;
         for (Game.Listener listener : game.listeners) {
             listener.scrollChanged();
         }
     }
 
     private void scroll(float delta) {
-        x = (x + delta) % Map.width;
-        y = (y + delta) % Map.height;
+        x = (x + delta) % map.width;
+        y = (y + delta) % map.height;
         for (Game.Listener listener : game.listeners) {
             listener.scrollChanged();
         }

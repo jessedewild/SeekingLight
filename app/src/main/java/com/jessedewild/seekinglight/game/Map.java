@@ -20,10 +20,12 @@ import java.util.List;
 
 public class Map extends Entity {
 
+    // Game
     private Game game;
     private Level level;
     private String json;
-    private Fog fog;
+
+    // Map components
     private List<Tile> tiles = new ArrayList<>();
     private List<Obtainable> obtainables = new ArrayList<>();
 
@@ -35,8 +37,8 @@ public class Map extends Entity {
     public float y;
 
     // Size of the level in tiles.
-    public static int width = 41;
-    public static int height = 41;
+    public int width;
+    public int height;
     public float tileSize;
 
     // The list of resource ids to draw each tile type with.
@@ -80,11 +82,11 @@ public class Map extends Entity {
         for (Obtainable obtainable : level.getLayers()[1].getObjects()) {
             int random = (int) (Math.random() * level.getLayers()[1].getObjects().length);
             if (random == level.getLayers()[1].getObjects().length) {
-                Star star = new Star(obtainable.getId(), obtainable.getX(), obtainable.getY(), obtainable.getX() / tileSize, obtainable.getY() / tileSize);
+                Star star = new Star(game, obtainable.getId(), obtainable.getX(), obtainable.getY(), obtainable.getX() / tileSize, obtainable.getY() / tileSize);
                 star.setResourceId(4);
                 obtainables.add(star);
             } else {
-                Coin coin = new Coin(obtainable.getId(), obtainable.getX(), obtainable.getY(), obtainable.getX() / tileSize, obtainable.getY() / tileSize);
+                Coin coin = new Coin(game, obtainable.getId(), obtainable.getX(), obtainable.getY(), obtainable.getX() / tileSize, obtainable.getY() / tileSize);
                 coin.setResourceId(3);
                 obtainables.add(coin);
             }
@@ -148,15 +150,6 @@ public class Map extends Entity {
         Fog fog = game.getEntity(Fog.class);
         if (game.isShowFog())
             gv.drawBitmap(fog.getBitmap(), 0, 0, game.getWidth(), game.getHeight());
-    }
-
-    private Obtainable getObtainable(float x, float y) {
-        for (Obtainable obtainable : obtainables) {
-            if (obtainable.getMapX() == x && obtainable.getMapY() == y) {
-                return obtainable;
-            }
-        }
-        return null;
     }
 
     public void removeObtainable(Obtainable obtainable) {

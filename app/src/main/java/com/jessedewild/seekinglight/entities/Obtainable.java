@@ -1,5 +1,6 @@
 package com.jessedewild.seekinglight.entities;
 
+import com.jessedewild.seekinglight.game.Game;
 import com.jessedewild.seekinglight.lib.Entity;
 
 public class Obtainable extends Entity {
@@ -9,14 +10,15 @@ public class Obtainable extends Entity {
     private float y;
     private float mapX;
     private float mapY;
-    private final float size = 0.5f;
+    private float size;
 
-    public Obtainable(int objectId, float x, float y, float mapX, float mapY) {
+    public Obtainable(Game game, int objectId, float x, float y, float mapX, float mapY) {
         this.objectId = objectId;
         this.x = x;
         this.y = y;
         this.mapX = mapX;
         this.mapY = mapY;
+        this.size = game.getHeight() / 33.2f;
     }
 
     public int getId() {
