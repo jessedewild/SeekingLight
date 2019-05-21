@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.jessedewild.seekinglight.R;
 import com.jessedewild.seekinglight.constructors.Level;
+import com.jessedewild.seekinglight.entities.Fog;
 import com.jessedewild.seekinglight.entities.Obtainable;
 import com.jessedewild.seekinglight.entities.Tile;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
@@ -22,6 +23,7 @@ public class Map extends Entity {
     private Game game;
     private Level level;
     private String json;
+    private Fog fog;
     private List<Tile> tiles = new ArrayList<>();
     private List<Obtainable> obtainables = new ArrayList<>();
 
@@ -142,6 +144,10 @@ public class Map extends Entity {
             }
             gv.drawBitmap(spriteBitmaps[resourceId], obtainableX * size - x, obtainableY * size - y, size / 2, size / 2);
         }
+
+        Fog fog = game.getEntity(Fog.class);
+        if (game.isShowFog())
+            gv.drawBitmap(fog.getBitmap(), 0, 0, game.getWidth(), game.getHeight());
     }
 
     private Obtainable getObtainable(float x, float y) {

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.jessedewild.seekinglight.compounds.CoinsView;
 import com.jessedewild.seekinglight.lib.GameView;
@@ -28,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gameCanvas = findViewById(R.id.mainGameView);
-        game = new Game();
+        game = new Game(getApplicationContext());
         ((Game) game).setJson(readJSONFile());
         ((Game) game).setAutoScroll(true);
         ((Game) game).setShowCharactersOnMap(false);
+        ((Game) game).setShowFog(false);
 
         // Start button
         findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {

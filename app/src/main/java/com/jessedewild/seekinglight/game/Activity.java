@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jessedewild.seekinglight.R;
 import com.jessedewild.seekinglight.compounds.CoinsView;
+import com.jessedewild.seekinglight.entities.Fog;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameView;
 import com.jessedewild.seekinglight.utils.Constants;
@@ -28,6 +30,7 @@ public class Activity extends AppCompatActivity {
 
     private Game game;
     private GameView gameView;
+    private ImageView fogView;
     private ProgressBar healthBar;
     private static CoinsView coinsView;
     private JoystickView joystick;
@@ -75,12 +78,13 @@ public class Activity extends AppCompatActivity {
         if (savedInstanceState != null && savedInstanceState.containsKey("game")) {
             game = (Game) savedInstanceState.getSerializable("game");
         } else {
-            game = new Game();
+            game = new Game(getApplicationContext());
             game.setJson(readJSONFile(1));
             game.setDeviceSize(deviceWidth, deviceHeight);
             game.setAutoScroll(false);
             game.setShowCharactersOnMap(true);
             game.setCoinsView(coinsView);
+            game.setShowFog(true);
         }
 
         /**

@@ -1,29 +1,37 @@
 package com.jessedewild.seekinglight.game;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.jessedewild.seekinglight.compounds.CoinsView;
 import com.jessedewild.seekinglight.constructors.Level;
 import com.jessedewild.seekinglight.entities.Background;
+import com.jessedewild.seekinglight.entities.Fog;
 import com.jessedewild.seekinglight.entities.characters.Monster;
 import com.jessedewild.seekinglight.entities.characters.Seeker;
 import com.jessedewild.seekinglight.lib.GameModel;
 import com.jessedewild.seekinglight.entities.Scroller;
-import com.jessedewild.seekinglight.utils.Constants;
 
 import java.util.ArrayList;
 
 public class Game extends GameModel {
 
     // GameModel state
+    public Context context;
     private Background background;
     public Map map;
     public Scroller scroller;
     public Seeker seeker;
     public Monster monster;
+    public Fog fog;
     private String json;
-    private boolean autoScroll, showCharactersOnMap;
+    private boolean autoScroll, showCharactersOnMap, showFog;
     private float deviceWidth, deviceHeight;
     private CoinsView coinsView;
+
+    public Game(Context context) {
+        this.context = context;
+    }
 
     // The listener receives calls when some game state is changed that should be
     // shown in Android Views other than the `GameView`. In this case, we're only
@@ -78,6 +86,10 @@ public class Game extends GameModel {
         monster = new Monster(this, 5);
         addEntity(monster);
 
+        // Fog entity
+        fog = new Fog(this);
+        addEntity(fog);
+
         // Fire event to set initial value in scroll view
         for (Game.Listener listener : listeners) {
             listener.scrollChanged();
@@ -123,5 +135,13 @@ public class Game extends GameModel {
 
     public void setCoinsView(CoinsView coinsView) {
         this.coinsView = coinsView;
+    }
+
+    public boolean isShowFog() {
+        return showFog;
+    }
+
+    public void setShowFog(boolean showFog) {
+        this.showFog = showFog;
     }
 }

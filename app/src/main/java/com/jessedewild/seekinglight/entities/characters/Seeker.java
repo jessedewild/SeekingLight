@@ -126,14 +126,14 @@ public class Seeker extends Entity {
             secondFutureX = firstFutureX;
             secondFutureY = firstFutureY + bitmapHeight + distance * size - distance;
         } else if (facingPosition.equals(Constants.FACING_POSITION.FRONT)) {
-            firstFutureX = seekerX + bitmapWidth + distance * size;
-            firstFutureY = seekerY + bitmapHeight + distance * size - distance * 2;
+            firstFutureX = seekerX + bitmapWidth + distance * size - distance;
+            firstFutureY = seekerY + bitmapHeight + distance * size;
 
             secondFutureX = firstFutureX - bitmapWidth;
             secondFutureY = firstFutureY;
         } else if (facingPosition.equals(Constants.FACING_POSITION.RIGHT)) {
-            firstFutureX = seekerX + bitmapWidth + distance * size - distance * 2;
-            firstFutureY = seekerY + bitmapHeight + distance * size;
+            firstFutureX = seekerX + bitmapWidth + distance * size;
+            firstFutureY = seekerY + bitmapHeight + distance * size - distance;
 
             secondFutureX = firstFutureX;
             secondFutureY = firstFutureY - bitmapHeight;
