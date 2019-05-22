@@ -19,6 +19,9 @@ public class Seeker extends Entity {
     // Game
     private Game game;
 
+    // Map
+    private Map map;
+
     // Model
     private final int[] drawables = {R.drawable.npc6_fr1, R.drawable.npc6_fr2, R.drawable.npc6_bk1, R.drawable.npc6_bk2, R.drawable.npc6_lf1, R.drawable.npc6_lf2, R.drawable.npc6_rt1, R.drawable.npc6_rt2};
     private Bitmap bitmap;
@@ -43,8 +46,9 @@ public class Seeker extends Entity {
         this.game = game;
         this.health = 200;
         this.damage = 50;
-        this.size = game.getHeight() / 16f;
-        this.bitmapSize = game.getHeight() / 25.7f;
+        this.size = this.game.getHeight() / 16f;
+        this.map = this.game.getEntity(Map.class);
+        this.bitmapSize = size / map.size; // game.getHeight() / 25.7f;
         this.x = game.getWidth() / 2 - bitmapSize;
         this.y = game.getHeight() / 2 - bitmapSize;
     }
@@ -93,11 +97,10 @@ public class Seeker extends Entity {
     }
 
     public boolean collision() {
-        Map map = game.getEntity(Map.class);
         float firstFutureX = 0, firstFutureY = 0, secondFutureX = 0, secondFutureY = 0;
-        float bitmapWidth = (float) bitmap.getWidth() / 100 - bitmapSize / 2;
-        float bitmapHeight = (float) bitmap.getHeight() / 100 - bitmapSize / 2;
-        float distance = 0.02f; // Distance to wall
+        float bitmapWidth = bitmapSize;
+        float bitmapHeight = bitmapSize;
+        float distance = map.size / 100; // Distance to wall
 
         seekerX = (map.x + game.getWidthByTwo() - bitmapSize) / map.size;
         seekerY = (map.y + game.getHeightByTwo() - bitmapSize) / map.size;

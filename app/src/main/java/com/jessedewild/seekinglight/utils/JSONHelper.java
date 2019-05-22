@@ -45,12 +45,12 @@ public class JSONHelper {
 
             return constants.toString();
         } catch (IOException e) {
-            Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 reader.close();
             } catch (IOException e) {
-                Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
         return null;
@@ -65,12 +65,12 @@ public class JSONHelper {
             outputStream = new FileOutputStream(file);
             outputStream.write(jsonString.getBytes());
         } catch (Exception e) {
-            Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 outputStream.close();
             } catch (NullPointerException | IOException e) {
-                Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -87,12 +87,12 @@ public class JSONHelper {
             Constants.coins = save.getCoins();
             Constants.level = save.getLevel();
         } catch (Exception e) {
-            Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 reader.close();
             } catch (NullPointerException | IOException e) {
-                Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
