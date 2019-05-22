@@ -64,12 +64,12 @@ public class JSONHelper {
         try {
             outputStream = new FileOutputStream(file);
             outputStream.write(jsonString.getBytes());
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 outputStream.close();
-            } catch (IOException e) {
+            } catch (NullPointerException | IOException e) {
                 Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -86,12 +86,12 @@ public class JSONHelper {
             // Load Save into Constants
             Constants.coins = save.getCoins();
             Constants.level = save.getLevel();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 reader.close();
-            } catch (IOException e) {
+            } catch (NullPointerException | IOException e) {
                 Toast.makeText(context, "File Exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
